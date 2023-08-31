@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>GUESS MY NUMBER</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: darkpink;
+            text-align: center;
+            background-image: url(background.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            width: 200px;
+            height: 30px;
+            margin: 10px 0; /* Add some vertical spacing */
+            background-color: #333;
+            color: #fff;
+        }
+
+        #guessNumber{
+            width: 200px;
+            height: 40px;
+            background-color: #fff;
+            color: #444;
+        }
+       
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="guess">
+        <h1>GUESS MY NUMBER</h1>
+        <p>A FUN NUMBER GUESSING JAVASCRIPT GAME</p>
+        <hr>
+        <h4>Guess my secret number. You will get feedback on how close, smaller or bigger</h4>
+
+        <label for="guessNumber">Guess a number between 1 and 100</label><br> <br>
+        <input type="number" id="guessNumber" placeholder="ENTER YOUR NUMBER" required>
+        
+        <div class="button-container">
+            <button onclick="checkGuess()">GUESS <span id="buttonText"></span></button>
+           
+        </div>
+        <h5>Guess #</h5>
+    </div>
+    <div id="result">
+    </div>
+</div>
+
+<script>
+    var number = Math.floor(Math.random() * 100) + 1;
+    var numberOfTries = 0;
+
+    function checkGuess() {
+        const userNumber = parseInt(document.getElementById("guessNumber").value);
+        const resultDisplay = document.getElementById("result");
+        const buttonText = document.getElementById("buttonText");
+
+        if (isNaN(userNumber) || userNumber < 1 || userNumber > 100) {
+            resultDisplay.textContent = "Please enter a valid number between 1 and 100";
+            
+            buttonText.textContent = "";
+            return;
+        }
+
+        numberOfTries++;
+
+        if (userNumber < number) {
+            resultDisplay.textContent = "Try a higher number";
+            buttonText.textContent = "";
+
+        } else if (userNumber > number) {
+            resultDisplay.textContent = "Try a lower number";
+            buttonText.textContent = "";
+        } else {
+            
+            resultDisplay.textContent = "Congratulations! You found the guess number " + number + " in " + numberOfTries + " tries.";
+            buttonText.textContent = "You Guessed It!";
+        }
+    }
+
+</script>
+</body>
+</html>
